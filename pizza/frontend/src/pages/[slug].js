@@ -1,45 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+
 export const getStaticPaths = async () => {
-  const pizzas = [
-    {
-      id: 1,
-      name: "cheese pizza 1",
-      slug: "cheese-pizza-1",
-      topping: ["a", "b"],
-      image:
-        "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80",
-      price: 10,
-    },
-    {
-      id: 2,
-      name: "fetta pizza 2",
-      slug: "cheese-pizza-2",
-      topping: ["a", "b"],
-      image:
-        "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80",
-      price: 10,
-    },
-    {
-      id: 3,
-      name: "meat pizza 3",
-      slug: "cheese-pizza-3",
-      topping: ["a", "b"],
-      image:
-        "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80",
-      price: 10,
-    },
-    {
-      id: 4,
-      name: "cheese pizza 4",
-      slug: "cheese-pizza-4",
-      topping: ["a", "b"],
-      image:
-        "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80",
-      price: 10,
-    },
-  ];
+  const res = await fetch("http://127.0.0.1:8000/pizza/");
+  const pizzas = await res.json();
+  console.log(pizzas);
   const paths = pizzas.map((pizza) => ({
     params: { slug: `${pizza.slug}` },
   }));
@@ -50,44 +16,8 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const pizzas = [
-    {
-      id: 1,
-      name: "cheese pizza 1",
-      slug: "cheese-pizza-1",
-      topping: ["a", "b"],
-      image:
-        "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80",
-      price: 10,
-    },
-    {
-      id: 2,
-      name: "fetta pizza 2",
-      slug: "cheese-pizza-2",
-      topping: ["a", "b"],
-      image:
-        "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80",
-      price: 10,
-    },
-    {
-      id: 3,
-      name: "meat pizza 3",
-      slug: "cheese-pizza-3",
-      topping: ["a", "b"],
-      image:
-        "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80",
-      price: 10,
-    },
-    {
-      id: 4,
-      name: "cheese pizza 4",
-      slug: "cheese-pizza-4",
-      topping: ["a", "b"],
-      image:
-        "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=728&q=80",
-      price: 10,
-    },
-  ];
+  const res = await fetch("http://127.0.0.1:8000/pizza/");
+  const pizzas = await res.json();
 
   const pizza = pizzas.filter((pizza) => pizza.slug.includes(params.slug));
   const otherPizzas = pizzas.filter((pizza) => pizza.slug !== params.slug);
